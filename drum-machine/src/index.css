@@ -4,6 +4,15 @@
   font-weight: 400;
 
   color-scheme: light dark;
+  --drum-pad-width: 100px;
+  --drum-pad-height: 100px;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media (prefers-color-scheme: light) {
@@ -17,4 +26,33 @@
   button {
     background-color: #f9f9f9;
   }
+}
+
+button {
+  cursor: pointer;
+}
+
+#display {
+  display: flex;
+  border: 5px solid orange;
+  /* width: 50%; */
+}
+
+#drum-machine {
+  display: flex;
+  border: 5px solid blue;
+  width: 1000px;
+  height: 500px;
+  align-items: center;
+  /* width: 50%; */
+  justify-content: space-between;
+}
+
+#drum-pads {
+  border: 5px solid red;
+  /* width: 50%; */
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, var(--drum-pad-width));
+  grid-template-rows: repeat(3, var(--drum-pad-height));
 }
