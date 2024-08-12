@@ -1,1 +1,1 @@
-Projects from [freeCodeCamp](https://www.freecodecamp.org/learn/)
+Projects from [freeCodeCamp](https://www.freecodecamp.org/learn/).
