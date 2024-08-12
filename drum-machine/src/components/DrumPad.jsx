@@ -1,4 +1,6 @@
-const DrumPad = ({ keyboardKey, audioSrc, name, handleClick }) => {
+import PropTypes from "prop-types";
+
+function DrumPad({ keyboardKey, audioSrc, name, handleClick }) {
   return (
     <button
       id={name}
@@ -14,6 +16,13 @@ const DrumPad = ({ keyboardKey, audioSrc, name, handleClick }) => {
       ></audio>
     </button>
   );
+}
+
+DrumPad.propTypes = {
+  keyboardKey: PropTypes.string.isRequired,
+  audioSrc: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default DrumPad;
