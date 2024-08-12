@@ -32,10 +32,6 @@ function App() {
     };
   }, []);
 
-  // const updateDisplay = (name) => {
-  //   setpressedDrumPad(name);
-  // };
-
   const playDrumPad = (id) => {
     const playPromise = document.getElementById(id).play();
     setpressedDrumPad(document.getElementById(id).getAttribute("name"));
