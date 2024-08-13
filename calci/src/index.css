@@ -1,0 +1,50 @@
+:root {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  /* align-content: center; */
+  /* justify-items: center; */
+  align-items: center;
+}
+
+#buttons {
+  display: grid;
+  grid-template-columns: 50px 50px 50px 50px;
+  grid-template-rows: 50px 50px 50px 50px 50px;
+  border: 2px solid black;
+  border-top: none;
+}
+
+#clear {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: brown;
+}
+
+#equals {
+  grid-column-start: 4;
+  grid-column-end: 5;
+  grid-row-start: 4;
+  grid-row-end: 6;
+  background-color: brown;
+}
+
+#zero {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  /* grid-row-start: 6;
+  grid-row-end: 6; */
+  background-color: brown;
+}
+
+#disaply {
+  width: 200px;
+  height: 70px;
+  border: 2px solid black;
+}
