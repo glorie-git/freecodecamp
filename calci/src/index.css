@@ -8,8 +8,6 @@ body {
   display: flex;
   height: 100vh;
   justify-content: center;
-  /* align-content: center; */
-  /* justify-items: center; */
   align-items: center;
 }
 
@@ -24,7 +22,7 @@ body {
 #clear {
   grid-column-start: 1;
   grid-column-end: 3;
-  background-color: brown;
+  background-color: darkorange;
 }
 
 #equals {
@@ -32,19 +30,28 @@ body {
   grid-column-end: 5;
   grid-row-start: 4;
   grid-row-end: 6;
-  background-color: brown;
+  background-color: darkorange;
 }
 
 #zero {
   grid-column-start: 1;
   grid-column-end: 3;
-  /* grid-row-start: 6;
-  grid-row-end: 6; */
-  background-color: brown;
+  background-color: darkorange;
 }
 
 #disaply {
   width: 200px;
   height: 70px;
   border: 2px solid black;
+  text-align: right;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 50px;
+}
+
+.operation {
+  background-color: grey;
 }
