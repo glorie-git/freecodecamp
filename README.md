@@ -1,6 +1,8 @@
-# Projects from [freeCodeCamp](https://www.freecodecamp.org/learn/)
+# React + Vite
 
-Browse through the different branches to view each project.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Projects:
-  - [Markdown Previewer](https://github.com/glorie-git/freecodecamp/tree/markdown-previewer)
+Currently, two official plugins are available:
+
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
