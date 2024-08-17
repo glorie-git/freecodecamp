@@ -12,29 +12,22 @@ function App() {
   const [breakLength, setBreakLength] = useState(DEFAULT.break);
   const [pauseTimer, setPauseTimer] = useState(true);
   const [count, setCount] = useState(DEFAULT.session);
-  // let pauseTimer = false;
 
   const handleReset = () => {
     console.log("Reseting timer");
     // stop timer
     clearInterval(timerRef.current);
-    // console.log(timerRef.current);
 
     // reset variables
     setSessionLength(DEFAULT.session);
     setBreakLength(DEFAULT.break);
     setCount(DEFAULT.session);
+    setPauseTimer(true);
     timerRef.current = null;
   };
 
   const handleStart = () => {
-    if (!timerRef.current) {
-      setPauseTimer(false);
-    } else {
-      setPauseTimer(!pauseTimer);
-    }
-
-    // pauseTimer = !pauseTimer;
+    setPauseTimer(!pauseTimer);
   };
 
   const breakDecrement = () => {
@@ -62,7 +55,6 @@ function App() {
     if (timerRef.current) clearInterval(timerRef.current);
     const interval = setInterval(() => {
       pauseTimer ? null : setCount((prevCount) => prevCount - 1);
-      console.log("Pause timer:", pauseTimer);
     }, 1000); // Update every second
     timerRef.current = interval;
     // Clean up the interval on component unmount
