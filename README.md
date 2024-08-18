@@ -6,3 +6,4 @@ Browse through the different branches to view each project.
   - [Markdown Previewer](https://github.com/glorie-git/freecodecamp/tree/markdown-previewer)
   - [Cali](https://github.com/glorie-git/freecodecamp/tree/cali)
   - [Drum Machine](https://github.com/glorie-git/freecodecamp/tree/drum-machine)
+  - [Sessions](https://sessionsbygloire.netlify.app/)
