@@ -6,13 +6,19 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    env:
+      working-directory: ./calci/
     steps:
       - uses: actions/checkout@v4
 
       # ( Build to ./dist or other directory... )
 
+      - name: Setup working directory
+        run: ls
+        working-directory: ${{env.working-directory}}
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
+        
         with:
           publish-dir: './dist'
           production-branch: master
