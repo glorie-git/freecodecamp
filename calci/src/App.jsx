@@ -1,49 +1,128 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 function App() {
-  // const operatorRef = useRef(null);
-  const [display, setDisplay] = useState(" ");
+  const [display, setDisplay] = useState("0");
   const [answer, setAnswer] = useState("");
+  const appendDecimalRef = useRef(true);
+  const OPERATOR = "operator";
+  const OTHER = "other";
+  const lastButtonRef = useRef(OTHER);
 
   const handleClick = (value) => {
-    // console.log(value);
     let symbol = value;
+    let newDisplayValue = `${display}`;
 
-    if (value == "add") {
-      symbol = "+";
-    } else if (value == "subtract") {
-      symbol = "-";
-    } else if (value == "divide") {
-      symbol = "/";
-    } else if (value == "multiply") {
-      symbol = "x";
-    } else if (value == "equals") {
-      try {
-        const answer = eval(display);
-        setDisplay(display + "=" + answer);
-        setAnswer(answer);
-      } catch (error) {
-        console.log(error);
+    if (
+      newDisplayValue.includes("ANS") &&
+      (value != "subtract" ||
+        value != "add" ||
+        value != "divide" ||
+        value != "multiply")
+    ) {
+      newDisplayValue = newDisplayValue.replace("ANS", "");
+    }
+
+    if (value == "0") {
+      if (display[0] == "0" && display.length < 2) {
+        // Do not add the extra leading 0, return
+        return;
+      }
+      lastButtonRef.current = OTHER;
+    } else if (
+      value === "subtract" ||
+      value === "add" ||
+      value === "divide" ||
+      value === "multiply"
+    ) {
+      if (lastButtonRef.current === OPERATOR) {
+        if (value !== "subtract") {
+          newDisplayValue = newDisplayValue.slice(
+            0,
+            newDisplayValue.length - 1
+          );
+
+          if (!parseInt(newDisplayValue.at(-1))) {
+            newDisplayValue = newDisplayValue.slice(
+              0,
+              newDisplayValue.length - 1
+            );
+          }
+        }
       }
 
+      switch (value) {
+        case "add":
+          symbol = "+";
+          break;
+        case "subtract":
+          symbol = "-";
+          break;
+        case "divide":
+          symbol = "/";
+          break;
+        default:
+          // "multiply"
+          symbol = "*";
+          break;
+      }
+
+      appendDecimalRef.current = true;
+      lastButtonRef.current = OPERATOR;
+    } else if (value === "decimal") {
+      if (!appendDecimalRef.current) {
+        return;
+      }
+      symbol = ".";
+      appendDecimalRef.current = false;
+      lastButtonRef.current = OTHER;
+    } else if (value === "equals") {
+      try {
+        const answer = eval(display);
+
+        appendDecimalRef.current = true;
+        lastButtonRef.current = OTHER;
+
+        setDisplay("ANS");
+        setAnswer(answer);
+      } catch (error) {
+        console.log(display);
+        console.log(error);
+      }
       return;
     }
 
-    if (value !== "clear" && value !== "equals") {
-      setAnswer(symbol);
-      setDisplay(display + symbol);
+    if (parseInt(value)) {
+      lastButtonRef.current = OTHER;
+    }
+
+    if (value !== "clear") {
+      if (answer && lastButtonRef.current === OPERATOR) {
+        console.log((newDisplayValue = answer));
+      }
+
+      newDisplayValue = newDisplayValue + symbol;
+      // clean up string .e.g. remove leading 0 if not followed by decimal
+      if (newDisplayValue[0] === "0" && newDisplayValue.length > 1) {
+        try {
+          newDisplayValue = newDisplayValue.slice(1);
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      setDisplay(newDisplayValue);
     } else {
-      setDisplay("");
+      appendDecimalRef.current = true;
+      lastButtonRef.current = OTHER;
+      setDisplay("0");
       setAnswer("");
     }
   };
 
   return (
     <div id="calculator">
-      <div id="disaply">
-        <div id="calculation_display">{display}</div>
-        <div id="answer_display">{answer}</div>
-      </div>
+      <div id="answer_display">{answer}</div>
+      <div id="display">{display === "ANS" ? answer : display}</div>
       <div id="buttons">
         <button onClick={() => handleClick("clear")} id="clear">
           AC
@@ -74,7 +153,7 @@ function App() {
         </button>
         <button
           className="operation"
-          onClick={() => handleClick("subtrat")}
+          onClick={() => handleClick("subtract")}
           id="subtract"
         >
           -
