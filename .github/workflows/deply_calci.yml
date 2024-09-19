@@ -18,6 +18,12 @@ jobs:
       - name: List folders
         run: ls
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+
       # ( Build to ./dist or other directory... )
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
