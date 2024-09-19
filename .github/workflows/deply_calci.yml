@@ -2,11 +2,9 @@
 name: Deploy Calci to Netlify
 on:
   push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+    branches: [master, main]
+  pull_request: 
+    branches: [master, main]
 jobs:
   job1:
     runs-on: ubuntu-22.04
