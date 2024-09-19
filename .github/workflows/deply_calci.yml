@@ -7,7 +7,7 @@ jobs:
   job1:
     runs-on: ubuntu-22.04
     env:
-        working-directory: ./calci/
+        working-directory: calci/
     steps:
       - name: Setup working directory
         run: ls
