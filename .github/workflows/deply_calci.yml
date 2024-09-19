@@ -6,11 +6,14 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-22.04
+    defaults:
+      run:
+        working-directory: calci
     # env:
     #     working-directory: calci/
     steps:
       - name: Setup working directory
-        working-directory: calci
+        # working-directory: calci
         run: pwd
   # build:
   #   runs-on: ubuntu-22.04
