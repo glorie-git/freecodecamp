@@ -7,13 +7,13 @@ on:
   push:
     branches: [master, main]
     paths:
-      - '{{env.PROJECT_NAME}}/**' # change this for other workflows
-      - '.github/workflows/deploy_{{env.PROJECT_NAME}}.yml' # change this for other workflows
+      - 'calci/**' # change this for other workflows
+      - '.github/workflows/deploy_calci.yml' # change this for other workflows
   pull_request:
     branches: [master, main]
     paths:
-      - '{{env.PROJECT_NAME}}/**' # change this for other workflows
-      - '.github/workflows/deploy_{{env.PROJECT_NAME}}.yml' # change this for other workflows
+      - 'calci/**' # change this for other workflows
+      - '.github/workflows/deploy_calci.yml' # change this for other workflows
 
 jobs:
   checkout:
