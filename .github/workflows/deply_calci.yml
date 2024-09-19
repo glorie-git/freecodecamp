@@ -24,6 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: List folders
+        run: ls
+
       # ( Build to ./dist or other directory... )
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v3.0
