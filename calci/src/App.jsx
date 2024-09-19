@@ -77,7 +77,7 @@ function App() {
       lastButtonRef.current = OTHER;
     } else if (value === "equals") {
       try {
-        const answer = eval(display);
+        const answer = new Function("return " + display)();
 
         appendDecimalRef.current = true;
         lastButtonRef.current = OTHER;
