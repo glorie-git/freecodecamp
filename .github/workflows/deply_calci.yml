@@ -6,11 +6,11 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-22.04
-    env:
-        working-directory: calci/
+    # env:
+    #     working-directory: calci/
     steps:
       - name: Setup working directory
-        run: ls -R
+        run: cd ~ && ls -R
         # working-directory: ${{env.working-directory}}
   # build:
   #   runs-on: ubuntu-22.04
