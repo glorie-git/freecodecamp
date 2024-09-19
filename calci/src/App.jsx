@@ -7,18 +7,55 @@ function App() {
   const OPERATOR = "operator";
   const OTHER = "other";
   const lastButtonRef = useRef(OTHER);
+  const buttons = [
+    "clear",
+    "divide",
+    "multiply",
+    7,
+    8,
+    9,
+    "subtract",
+    4,
+    5,
+    6,
+    "add",
+    1,
+    2,
+    3,
+    "equals",
+    0,
+    "decimal",
+  ];
+  const operations = {
+    subtract: "-",
+    add: "+",
+    divide: "/",
+    multiply: "*",
+  };
+
+  const isOperator = (value) => value in operations;
+  const isNumeric = (value) => !isNaN(value);
+  const resetDisplay = () => {
+    appendDecimalRef.current = true;
+    setDisplay("0");
+    setAnswer("");
+  };
+
+  const handleEquals = () => {
+    try {
+      const result = new Function("return " + display)();
+      setAnswer(result);
+      setDisplay("ANS");
+    } catch (error) {
+      console.error("Error evaluating expression:", error);
+    }
+  };
 
   const handleClick = (value) => {
     let symbol = value;
     let newDisplayValue = `${display}`;
 
-    if (
-      newDisplayValue.includes("ANS") &&
-      (value != "subtract" ||
-        value != "add" ||
-        value != "divide" ||
-        value != "multiply")
-    ) {
+    if (newDisplayValue.includes("ANS") && !isOperator(value)) {
       newDisplayValue = newDisplayValue.replace("ANS", "");
     }
 
@@ -28,12 +65,7 @@ function App() {
         return;
       }
       lastButtonRef.current = OTHER;
-    } else if (
-      value === "subtract" ||
-      value === "add" ||
-      value === "divide" ||
-      value === "multiply"
-    ) {
+    } else if (operations[value]) {
       if (lastButtonRef.current === OPERATOR) {
         if (value !== "subtract") {
           newDisplayValue = newDisplayValue.slice(
@@ -50,21 +82,7 @@ function App() {
         }
       }
 
-      switch (value) {
-        case "add":
-          symbol = "+";
-          break;
-        case "subtract":
-          symbol = "-";
-          break;
-        case "divide":
-          symbol = "/";
-          break;
-        default:
-          // "multiply"
-          symbol = "*";
-          break;
-      }
+      symbol = operations[value];
 
       appendDecimalRef.current = true;
       lastButtonRef.current = OPERATOR;
@@ -97,7 +115,7 @@ function App() {
 
     if (value !== "clear") {
       if (answer && lastButtonRef.current === OPERATOR) {
-        console.log((newDisplayValue = answer));
+        newDisplayValue = answer;
       }
 
       newDisplayValue = newDisplayValue + symbol;
@@ -114,14 +132,12 @@ function App() {
     } else {
       appendDecimalRef.current = true;
       lastButtonRef.current = OTHER;
-      setDisplay("0");
-      setAnswer("");
+      resetDisplay();
     }
   };
 
   return (
     <div id="calculator">
-      <div id="answer_display">{answer}</div>
       <div id="display">{display === "ANS" ? answer : display}</div>
       <div id="buttons">
         <button onClick={() => handleClick("clear")} id="clear">
@@ -195,6 +211,16 @@ function App() {
         <button onClick={() => handleClick("decimal")} id="decimal">
           .
         </button>
+        {/* {buttons.map((button, index) => (
+          <button
+            key={index}
+            onClick={() => handleClick(button)}
+            className={isOperator(button) ? "operation" : ""}
+            // id=""
+          >
+            {button}
+          </button>
+        ))} */}
       </div>
     </div>
   );
