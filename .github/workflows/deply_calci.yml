@@ -14,8 +14,9 @@ jobs:
     # env:
     #     working-directory: calci/
     steps:
-      - uses: actions/checkout@v4
       - name: Setup working directory
+        uses: actions/checkout@v4
+      
       - name: List folders
         run: |
           echo "Listing all folders in the repository:"
