@@ -1,16 +1,19 @@
 name: Deploy Calci to Netlify
 
+env:
+  PROJECT_NAME: 'calci'
+  
 on:
   push:
     branches: [master, main]
     paths:
-      - 'calci/**' # change this for other workflows
-      - '/.github/workflows/deploy_calci.yml' # change this for other workflows
+      - '{{env.PROJECT_NAME}}/**' # change this for other workflows
+      - '.github/workflows/deploy_{{env.PROJECT_NAME}}.yml' # change this for other workflows
   pull_request:
     branches: [master, main]
     paths:
-      - 'calci/**' # change this for other workflows
-      - '/.github/workflows/deploy_calci.yml' # change this for other workflows
+      - '{{env.PROJECT_NAME}}/**' # change this for other workflows
+      - '.github/workflows/deploy_{{env.PROJECT_NAME}}.yml' # change this for other workflows
 
 jobs:
   checkout:
