@@ -16,7 +16,7 @@ jobs:
     steps:
       - name: Setup working directory
         # working-directory: calci
-        run: cd ../ && ls && pwd
+        run: ls && cd ../ && ls && pwd
   # build:
   #   runs-on: ubuntu-22.04
     
