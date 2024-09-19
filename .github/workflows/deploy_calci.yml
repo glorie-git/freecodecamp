@@ -5,12 +5,12 @@ on:
     branches: [master, main]
     paths:
       - 'calci/**' # change this for other workflows
-      - 'deploy_calci.yml' # change this for other workflows
+      - '/.github/workflows/deploy_calci.yml' # change this for other workflows
   pull_request:
     branches: [master, main]
     paths:
       - 'calci/**' # change this for other workflows
-      - 'deploy_calci.yml' # change this for other workflows
+      - '/.github/workflows/deploy_calci.yml' # change this for other workflows
 
 jobs:
   checkout:
