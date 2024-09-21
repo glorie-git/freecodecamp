@@ -1,5 +1,6 @@
 :root {
   font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
 
   --primary-colour: black;
   --secondary-colour: white;
@@ -17,6 +18,7 @@ body {
   align-items: center;
   height: 100vh;
   text-align: center;
+  background-color: beige;
 }
 
 #top-container {
@@ -24,4 +26,24 @@ body {
   text-align: center;
   justify-content: center;
   gap: 50px;
+}
+
+button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  margin: 0 2px;
+  border-radius: 5px;
+}
+
+#reset {
+  background-color: red;
+  border: 2px solid red;
+}
+
+#start_stop {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
 }
