@@ -1,0 +1,36 @@
+name: Deploy Sessions to Netlify
+  
+on:
+  push:
+    branches: [master, main]
+    paths:
+      - 'sessions/**' # change this for other workflows
+      - '.github/workflows/deploy_sessions.yml' # change this for other workflows
+  pull_request:
+    branches: [master, main]
+    paths:
+      - 'sessions/**' # change this for other workflows
+      - '.github/workflows/deploy_sessions.yml' # change this for other workflows
+
+jobs:
+  setup:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install && npm run build
+        working-directory: sessions
+        
+  deploy:
+    runs-on: ubuntu-22.04
+    needs: setup 
+    steps:
+      - name: Deploy to Netlify
+        run: curl -X POST -d '{}' ${{ secrets.NETLIFY_SESSIONS_BUILD_HOOK }}
