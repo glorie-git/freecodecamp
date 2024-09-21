@@ -7,15 +7,14 @@ function App() {
   const appendDecimalRef = useRef(true);
   const OPERATOR = "operator";
   const OTHER = "other";
-  const lastButtonRef = useRef(OTHER);
   const buttons = [
     { id: "clear", operator: true, value: "AC" },
-    { id: "divide", operator: false, value: "/" },
-    { id: "multiply", operator: false, value: "*" },
+    { id: "divide", operator: true, value: "/" },
+    { id: "multiply", operator: true, value: "*" },
     { id: "seven", operator: false, value: "7" },
     { id: "eight", operator: false, value: "8" },
     { id: "nine", operator: false, value: "9" },
-    { id: "subtract", operator: false, value: "-" },
+    { id: "subtract", operator: true, value: "-" },
     { id: "four", operator: false, value: "4" },
     { id: "five", operator: false, value: "5" },
     { id: "six", operator: false, value: "6" },
@@ -28,16 +27,15 @@ function App() {
     { id: "decimal", operator: false, value: "." },
   ];
 
-  // const isOperator = (value) => value in operations;
   const isOperator = (value) => ["*", "-", "/", "+"].includes(value);
   const isNumeric = (value) => !isNaN(value);
+  let newDisplayValue = "";
+
   const resetDisplay = () => {
     appendDecimalRef.current = true;
     setDisplay("0");
     setAnswer("");
   };
-
-  let newDisplayValue = "";
 
   const handleEquals = () => {
     try {
@@ -49,34 +47,20 @@ function App() {
     }
   };
 
-  const clearLeadingZero = () => {
-    if (newDisplayValue[0] === "0" && newDisplayValue.length > 1) {
-      newDisplayValue = newDisplayValue.slice(1);
-    }
-  };
-
-  const handleZero = () => {
-    if (display[0] == "0" && display.length < 2) {
-      // Do not add the extra leading 0, return
-      return;
-    }
-    lastButtonRef.current = OTHER;
-  };
-
-  const handleClick = (value) => {
+  const handleClick = (clickedButton) => {
     newDisplayValue = display;
 
-    if (newDisplayValue.includes("ANS") && !isOperator(value)) {
+    if (newDisplayValue.includes("ANS") && !isOperator(clickedButton)) {
       newDisplayValue = newDisplayValue.replace("ANS", "");
     }
 
-    if (isNumeric(value)) {
-      if (value === "0") handleZero();
-      newDisplayValue += value;
-      clearLeadingZero();
-      lastButtonRef.current = OTHER;
-    } else if (isOperator(value)) {
-      if (lastButtonRef.current === OPERATOR && value !== "-") {
+    if (isNumeric(clickedButton)) {
+      newDisplayValue += clickedButton;
+      if (newDisplayValue[0] === "0" && newDisplayValue.length > 1) {
+        newDisplayValue = newDisplayValue.slice(1);
+      }
+    } else if (isOperator(clickedButton)) {
+      if (isOperator(newDisplayValue.at(-1)) && clickedButton !== "-") {
         newDisplayValue = newDisplayValue.slice(0, newDisplayValue.length - 1);
         if (!parseInt(newDisplayValue.at(-1))) {
           newDisplayValue = newDisplayValue.slice(
@@ -87,33 +71,27 @@ function App() {
       }
 
       appendDecimalRef.current = true;
-      lastButtonRef.current = OPERATOR;
 
-      if (answer && lastButtonRef.current === OPERATOR) {
+      if (answer) {
         newDisplayValue = answer;
       }
 
-      newDisplayValue += value;
-    } else if (value === ".") {
-      if (!appendDecimalRef.current) {
-        return;
+      newDisplayValue += clickedButton;
+    } else if (clickedButton === ".") {
+      if (appendDecimalRef.current) {
+        newDisplayValue += clickedButton;
+        appendDecimalRef.current = false;
       }
-
-      newDisplayValue += value;
-
-      appendDecimalRef.current = false;
-      lastButtonRef.current = OTHER;
-    } else if (value === "=") {
+    } else if (clickedButton === "=") {
       handleEquals();
       return;
-    } else if (value === "AC") {
+    } else if (clickedButton === "AC") {
       appendDecimalRef.current = true;
-      lastButtonRef.current = OTHER;
       resetDisplay();
+      return;
     }
 
-    value !== "AC" ? setDisplay(newDisplayValue) : resetDisplay();
-    
+    setDisplay(newDisplayValue);
   };
 
   return (
