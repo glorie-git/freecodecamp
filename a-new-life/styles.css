@@ -1,0 +1,95 @@
+* {
+  box-sizing: border-box;
+  --nav-width: 300px;
+  font-size: 16px;
+}
+
+/* body {
+  border: 1px solid blue;
+  padding: 100px;
+} */
+
+#navbar {
+  width: var(--nav-width);
+  height: 100vh;
+  position: fixed;
+}
+
+body {
+  padding: 0 50px 0 10px;
+}
+
+#main-doc {
+  width: calc(100% - var(--nav-width));
+  left: var(--nav-width);
+  position: relative;
+  margin: 2rem;
+}
+
+code {
+  display: block;
+  padding: 30px;
+  background-color: rgb(233, 233, 233);
+}
+
+.nav-link {
+  display: block;
+  width: 100%;
+  text-decoration: none;
+  color: black;
+}
+
+#navbar header {
+  font-weight: bold;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+#navbar a {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid black;
+  padding-bottom: 1rem;
+}
+
+#main-doc section header {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+#main-doc section {
+  border-bottom: 1px solid black;
+  padding-bottom: 3rem;
+}
+
+#main-doc section:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+@media (max-width: 700px) {
+  #navbar header {
+    position: sticky;
+    top: 0;
+    background-color: white;
+  }
+
+  #navbar {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: scroll;
+  }
+
+  #navbar:hover {
+    background-color: rgb(233, 233, 233);
+  }
+
+  #main-doc {
+    position: relative;
+    width: 100%;
+    left: -30px;
+    right: var(--nav-width);
+  }
+}
