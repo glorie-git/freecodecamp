@@ -7,17 +7,20 @@
   font-size: 24px;
   font-family: Robot, sans-serif;
 
-  color: black;
   --border-radius: 10px;
+
+  color: white;
+  --color-black: rgb(17, 17, 17);
 
   transition: transform 0.15s linear, opacity 0.15s linear;
 }
 
+/* .hover-underline:hover {
+  text-decoration: solid;
+} */
+
 input {
-  /* border: none; */
   margin: 3px 0;
-  /* border-radius: var(--border-radius); */
-  /* background-color: blue; */
 }
 
 input:focus {
@@ -58,6 +61,22 @@ footer {
   padding: 50px;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+  /* text-decoration: solid underline purple 4px; */
+}
+
+section {
+  padding: 50px;
+}
+
+p {
+  color: black;
+}
+
+/* BUTTONS */
+
 button {
   margin: 10px 0;
   border: none;
@@ -65,36 +84,60 @@ button {
   border-radius: var(--border-radius);
 }
 
-a {
-  color: white;
-  text-decoration: none;
-}
-
-section {
-  padding: 50px;
-}
-
 button:hover {
   transform: scale(1.01);
 }
 
-p {
-  color: black;
+/* LET'S WORK BUTTON */
+
+#work-button {
+  background-color: black;
+  border: 2px solid white;
 }
 
 /* NAVBAR */
 
-#navbar {
-  background-color: black;
-  position: fixed;
-  top: 0;
-  padding: 10px;
-  border-radius: 0 0 var(--border-radius) var(--border-radius);
+#logo {
+  height: 30px;
 }
 
-#navbar * a:hover {
-  opacity: 80%;
-  /* background-color: red; */
+#navbar {
+  /* background-color: black; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  position: fixed;
+  top: 0;
+  padding: 0 20px;
+  margin-top: 20px;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  width: 100%;
+}
+
+li {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: black;
+  font-size: 16px;
+  padding-bottom: 5px;
+}
+
+li::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px; /* Border thickness */
+  background-color: black; /* Border color */
+  transition: width 0.3s ease; /* Adjust timing as needed */
+}
+
+li:hover:after {
+  width: 100%;
+  background: lime;
 }
 
 nav {
@@ -116,8 +159,9 @@ nav ul {
 #welcome-section {
   height: 100vh;
   text-align: center;
-  background-color: white;
-  color: inherit;
+  /* background-color: white; */
+  background-color: var(--color-black);
+  /* color: inherit; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -128,12 +172,12 @@ nav ul {
   font-size: 2rem;
 }
 
-#welcome-section p {
+/* #welcome-section p {
   color: black;
-}
+} */
 
 #cta {
-  background-color: black;
+  /* background-color: black; */
   font-weight: 700;
   text-transform: uppercase;
 }
